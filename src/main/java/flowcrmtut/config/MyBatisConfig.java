@@ -13,8 +13,6 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.sql.DataSource;
 
-@MapperScan("flowcrmtut.dao")
-@MappedTypes(Company.class)
 @Configuration
 public class MyBatisConfig {
 
