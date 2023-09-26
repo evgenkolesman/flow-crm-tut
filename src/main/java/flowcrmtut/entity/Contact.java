@@ -4,10 +4,40 @@ import flowcrmtut.model.Company;
 import flowcrmtut.model.Status;
 
 public class Contact {
+    private String firstName;
+    private String lastName;
 
+
+    private String email;
     private Status status;
 
     private Company company;
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public Contact setFirstName(String firstName) {
+        this.firstName = firstName;
+        return this;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public Contact setLastName(String lastName) {
+        this.lastName = lastName;
+        return this;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public Contact setEmail(String email) {
+        this.email = email;
+        return this;
+    }
 
     public Status getStatus() {
         return status;
