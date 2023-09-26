@@ -24,7 +24,6 @@ repositories {
 
 ext {
     set('vaadinVersion', "23.3.24")
-    set('springBooToolsVersion', "2.3.1")
 }
 
 dependencies {
@@ -36,7 +35,7 @@ dependencies {
     runtimeOnly 'org.postgresql:postgresql'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:${springBooToolsVersion}'
+    testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:2.3.1'
 }
 
 dependencyManagement {
