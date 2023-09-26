@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: Password
+    url: jdbc:postgresql://localhost:5432/flowcrmtut?currentSchema=flowcrmtut
+  liquibase:
+    change-log: liquebase-changelog.xml
+    enabled: true
