@@ -1,4 +1,5 @@
 package flowcrmtut.model;
 
-public class Company {
+public class Company extends CommonModel{
+
 }

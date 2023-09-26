@@ -1,2 +1,6 @@
-package flowcrmtut.model;public class Status {
+package flowcrmtut.model;
+
+public class Status extends CommonModel{
+
+
 }
