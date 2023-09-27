@@ -44,6 +44,48 @@ dependencyManagement {
     }
 }
 
-tasks.named('test') {
-    useJUnitPlatform()
+tasks.register('HELLO') {
+    doFirst {
+        println("++++++++++++++++++ HELLO WE START BUILD +++++++++++++++++")
+    }
 }
+
+tasks.named('build'){
+    dependsOn(tasks.named('HELLO'))
+}
+
+tasks.withType(Test).configureEach {
+    enabled(false)
+}
+
+
+//tasks.withType(CompileTest).configureEach {
+//    enabled(false)
+//}
+
+
+
+//tasks.named('build') {
+//    add(getTasksByName("HELLO"))
+//}
+
+tasks.configureEach {
+    doFirst {
+        println("task $name started")
+    }
+}
+
+
+//
+//test{
+//    exclude('**/')
+//}
+
+//
+//tasks.named('test') {
+//    replace('test')
+//}
+
+//tasks.named('test') {
+//    useJUnitPlatform()
+//}

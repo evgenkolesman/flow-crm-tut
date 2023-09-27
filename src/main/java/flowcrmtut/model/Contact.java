@@ -1,7 +1,4 @@
-package flowcrmtut.entity;
-
-import flowcrmtut.model.Company;
-import flowcrmtut.model.Status;
+package flowcrmtut.model;
 
 public class Contact {
     private String firstName;
