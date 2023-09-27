@@ -3,11 +3,8 @@ package flowcrmtut.model;
 public class Contact {
     private String firstName;
     private String lastName;
-
-
     private String email;
     private Status status;
-
     private Company company;
     public String getFirstName() {
         return firstName;

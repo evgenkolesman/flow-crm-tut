@@ -16,14 +16,15 @@ CREATE  TABLE IF NOT EXISTS flowcrmtut.contact
 CREATE TABLE IF NOT EXISTS flowcrmtut.company
 (
     id       uuid PRIMARY KEY default gen_random_uuid(),
-    name text,
-    employee_id  uuid
+    name text
 );
 
 CREATE TABLE IF NOT EXISTS flowcrmtut.employee
 (
     id       uuid PRIMARY KEY default gen_random_uuid(),
-    employee_data  text
+    employee_data  text,
+    company_id uuid
+
 );
 
 CREATE TABLE IF NOT EXISTS flowcrmtut.status
@@ -38,3 +39,6 @@ REFERENCES flowcrmtut.status(id);
 ALTER TABLE IF EXISTS flowcrmtut.contact ADD FOREIGN KEY(company_id)
 REFERENCES flowcrmtut.company(id);
 
+alter table employee
+    add constraint employee_company_id_fk
+        foreign key (company_id) references company;

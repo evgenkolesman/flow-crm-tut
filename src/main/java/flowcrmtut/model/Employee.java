@@ -1,5 +1,11 @@
 package flowcrmtut.model;
 
+import java.util.UUID;
+
 public class Employee {
-    String employeeDate;
+    private UUID id;
+    private String employeeDate;
+
+    private UUID companyId;
+
 }

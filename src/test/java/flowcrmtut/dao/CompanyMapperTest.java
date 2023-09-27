@@ -41,5 +41,8 @@ class CompanyMapperTest {
 
     @Test
     void getCompanyByName() {
+        List<Company> companiesList = companyMapper.getCompanyByName(newCompany);
+        assertThat(companiesList.size()).isEqualTo(1);
+        assertThat(companiesList.get(0).getName()).isEqualTo(newCompany);
     }
 }

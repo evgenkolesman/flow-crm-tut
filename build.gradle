@@ -54,9 +54,19 @@ tasks.named('build'){
     dependsOn(tasks.named('HELLO'))
 }
 
-tasks.withType(Test).configureEach {
-    enabled(false)
+tasks.configureEach {
+    doFirst {
+        println("task $name started")
+    }
 }
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+//tasks.withType(Test).configureEach {
+//    enabled(false)
+//}
 
 
 //tasks.withType(CompileTest).configureEach {
@@ -69,11 +79,6 @@ tasks.withType(Test).configureEach {
 //    add(getTasksByName("HELLO"))
 //}
 
-tasks.configureEach {
-    doFirst {
-        println("task $name started")
-    }
-}
 
 
 //
@@ -86,6 +91,3 @@ tasks.configureEach {
 //    replace('test')
 //}
 
-//tasks.named('test') {
-//    useJUnitPlatform()
-//}
