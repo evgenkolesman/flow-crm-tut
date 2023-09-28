@@ -2,13 +2,15 @@ package flowcrmtut.model;
 
 import java.util.UUID;
 
-public class Company extends CommonModel{
+public class Company {
 
     UUID id;
-//    List<Employee> employees;
-
+    String name;
     public UUID getId() {
         return id;
+    }
+    public String getName() {
+        return name;
     }
 
     public Company setId(UUID id) {
@@ -25,12 +27,4 @@ public class Company extends CommonModel{
         return this;
     }
 
-//    public List<Employee> getEmployees() {
-//        return employees;
-//    }
-//
-//    public Company setEmployees(List<Employee> employees) {
-//        this.employees = employees;
-//        return this;
-//    }
 }

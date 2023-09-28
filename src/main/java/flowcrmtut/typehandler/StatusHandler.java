@@ -1,5 +1,6 @@
 package flowcrmtut.typehandler;
 
+import flowcrmtut.config.CommonConfig;
 import flowcrmtut.dao.StatusMapper;
 import flowcrmtut.model.Status;
 import org.apache.ibatis.type.BaseTypeHandler;
@@ -14,11 +15,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @MappedJdbcTypes(value = JdbcType.VARCHAR, includeNullJdbcType = true)
-@Component
 public class StatusHandler extends BaseTypeHandler<Status> {
 
-    @Autowired
-    private StatusMapper statusMapper;
+    private StatusMapper statusMapper = (StatusMapper) CommonConfig.getApplicationContext().getBean("statusMapper");
 
     @Override
     public void setNonNullParameter(PreparedStatement ps, int i, Status parameter, JdbcType jdbcType) throws SQLException {

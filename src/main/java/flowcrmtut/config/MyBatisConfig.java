@@ -29,6 +29,7 @@ public class MyBatisConfig {
         factoryBean.setTypeAliases(Status.class, Company.class, Contact.class, Employee.class, UUID.class);
         SqlSessionFactory sqlSessionFactory = factoryBean.getObject();
         sqlSessionFactory.getConfiguration().setJdbcTypeForNull(JdbcType.NULL);
+        sqlSessionFactory.getConfiguration().setMapUnderscoreToCamelCase(true);
 
         return sqlSessionFactory;
     }

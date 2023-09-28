@@ -1,6 +1,8 @@
 package flowcrmtut.typehandler;
 
+import flowcrmtut.config.CommonConfig;
 import flowcrmtut.dao.CompanyMapper;
+import flowcrmtut.dao.StatusMapper;
 import flowcrmtut.model.Company;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
@@ -15,8 +17,7 @@ import java.sql.SQLException;
 @MappedJdbcTypes(value = JdbcType.VARCHAR, includeNullJdbcType = true)
 public class CompanyHandler extends BaseTypeHandler<Company> {
 
-    @Autowired
-    private CompanyMapper companyMapper;
+    private CompanyMapper companyMapper = (CompanyMapper) CommonConfig.getApplicationContext().getBean("companyMapper");;
     @Override
     public void setNonNullParameter(PreparedStatement ps, int i, Company parameter, JdbcType jdbcType) throws SQLException {
         ps.setObject(i, parameter.getId());

@@ -20,11 +20,17 @@ public interface CompanyMapper {
     @Select("""
             SELECT id, name FROM flowcrmtut.company WHERE name = #{name}
             """)
+    @Results({
+            @Result(column = "id", property = "id", typeHandler = UUIDTypeHandler.class),
+            @Result(column = "name", property = "name")})
     List<Company> getCompanyByName(@Param("name") String name);
 
  @Select("""
             SELECT id, name FROM flowcrmtut.company WHERE id = #{id}::UUID
             """)
+ @Results({
+         @Result(column = "id", property = "id", typeHandler = UUIDTypeHandler.class),
+         @Result(column = "name", property = "name")})
     Company getCompanyById(@Param("id") String id);
 
 

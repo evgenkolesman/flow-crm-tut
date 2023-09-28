@@ -29,7 +29,7 @@ public interface StatusMapper {
             @Result(column = "id", property = "id", typeHandler = UUIDTypeHandler.class),
             @Result(column = "name", property = "name")})
  @Select("""
-            SELECT id, name  FROM flowcrmtut.status WHERE id = #{id}
+            SELECT id, name  FROM flowcrmtut.status WHERE id = #{id}::uuid
             """)
     Status getStatusById(@Param("id") String id);
 

@@ -46,6 +46,7 @@ class ContactMapperTest {
 
         Contact contact = new Contact().setFirstName("FIRST_NAME")
                 .setLastName("LAST_NAME")
+                .setFirstName("FIRST_NAME")
                 .setEmail("EMAIL@EMAIL.VU")
                 .setCompany(companyMapper.getCompanyByName(newCompany).get(0))
                 .setStatus(statusMapper.getStatusByName(newStatus).get(0));
@@ -55,19 +56,22 @@ class ContactMapperTest {
 
     @AfterEach
     void tearDown() {
+        contactMapper.deleteContactById(contactId);
         companyMapper.deleteCompanyByName(newCompany);
         statusMapper.deleteStatusByName(newStatus);
-        contactMapper.deleteContactById(contactId);
 
     }
 
     @Test
-    void getCompaniesList() {
+    void getContactFullCase() {
         var contact = contactMapper.getContactByName(contactId);
         assertThat(contact).isNotNull();
         assertThat(contact.getId()).isEqualTo(contactId);
-        assertThat(contact.getCompany().getName()).isEqualTo(newCompany);
+        assertThat(contact.getLastName()).isEqualTo("LAST_NAME");
+        assertThat(contact.getFirstName()).isEqualTo("FIRST_NAME");
+        assertThat(contact.getEmail()).isEqualTo("EMAIL@EMAIL.VU");
         assertThat(contact.getStatus().getName()).isEqualTo(newStatus);
+        assertThat(contact.getCompany().getName()).isEqualTo(newCompany);
     }
 
 }
