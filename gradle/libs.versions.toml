@@ -1,0 +1,7 @@
+[versions]
+mybatisVersion = "2.3.1"
+vaadinVersion = "23.3.24"
+[libraries]
+mybatis = { module = "org.mybatis.spring.boot:mybatis-spring-boot-starter", version.ref = "mybatisVersion" }
+mybatis-test = { module = "org.mybatis.spring.boot:mybatis-spring-boot-starter-test", version.ref = "mybatisVersion" }
+vaadin = { module = "com.vaadin:vaadin-spring-boot-starter", version.ref = "vaadinVersion"}

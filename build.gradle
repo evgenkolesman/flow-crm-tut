@@ -20,28 +20,24 @@ configurations {
     }
 }
 
-ext {
-    set('vaadinVersion', "23.3.24")
-}
-
 dependencies {
 //    implementation(project("someproject")) для подпроекта
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
-    implementation 'com.vaadin:vaadin-spring-boot-starter'
+    implementation libs.vaadin
     implementation 'org.liquibase:liquibase-core'
-    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.3.1'
+    implementation libs.mybatis
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'org.postgresql:postgresql'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:2.3.1'
+    testImplementation libs.mybatis.test
 }
 
-dependencyManagement {
-    imports {
-        mavenBom "com.vaadin:vaadin-bom:${vaadinVersion}"
-    }
-}
+//dependencyManagement {
+//    imports {
+//        mavenBom libs.vaadin
+//    }
+//}   -- all in libs maybe is a way for dependency manging with libs need check
 
 tasks.register('HELLO') {
     doFirst {
