@@ -1,6 +1,7 @@
 package flowcrmtut.dao;
 
 import flowcrmtut.model.Status;
+import flowcrmtut.typehandler.UUIDTypeHandler;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -8,29 +9,39 @@ import java.util.List;
 @Mapper
 public interface StatusMapper {
 
+    @Results({
+            @Result(column = "id", property = "id", typeHandler = UUIDTypeHandler.class),
+            @Result(column = "name", property = "name")})
     @Select("""
             SELECT * FROM flowcrmtut.status
             """)
     List<Status> getStatusesList();
 
+    @Results({
+            @Result(column = "id", property = "id", typeHandler = UUIDTypeHandler.class),
+            @Result(column = "name", property = "name")})
     @Select("""
-            SELECT * FROM flowcrmtut.status WHERE name = #{name}
+            SELECT id, name  FROM flowcrmtut.status WHERE name = #{name}
             """)
     List<Status> getStatusByName(@Param("name") String name);
 
+    @Results({
+            @Result(column = "id", property = "id", typeHandler = UUIDTypeHandler.class),
+            @Result(column = "name", property = "name")})
  @Select("""
-            SELECT * FROM flowcrmtut.status WHERE id = #{id}
+            SELECT id, name  FROM flowcrmtut.status WHERE id = #{id}
             """)
     Status getStatusById(@Param("id") String id);
 
 
-    @Insert("""
+    @Select("""
             INSERT INTO flowcrmtut.status(name)
-            VALUES(#{name})
+            VALUES(#{name}) RETURNING id
             """)
     @Options(useGeneratedKeys = true, keyProperty = "id",
             keyColumn = "id")
-    void insertStatus(Status status);
+    @Result(id = true, column = "id")
+    String insertStatus(Status status);
 
     @Delete("""
             DELETE FROM flowcrmtut.status

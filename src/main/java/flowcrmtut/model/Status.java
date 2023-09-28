@@ -14,4 +14,9 @@ public class Status extends CommonModel{
         this.id = id;
         return this;
     }
+
+    public Status setName(String name) {
+        this.name = name;
+        return this;
+    }
 }

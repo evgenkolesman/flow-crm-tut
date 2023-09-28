@@ -39,17 +39,18 @@ class ContactMapperTest {
     void setUp() {
 
         newCompany = "NewCompany";
-        companyMapper.insertCompany((Company) new Company().setName(newCompany));
+        String s = companyMapper.insertCompany(new Company().setName(newCompany));
 
         newStatus = "NEW";
-        statusMapper.insertStatus((Status) new Status().setName(newStatus));
+        UUID statusUUID = UUID.fromString(statusMapper.insertStatus(new Status().setName(newStatus)));
 
-        contactId = contactMapper.insertContact(
-                new Contact().setFirstName("FIRST_NAME")
-                        .setLastName("LAST_NAME")
-                        .setEmail("EMAIL@EMAIL.VU")
-                        .setCompany(companyMapper.getCompanyByName(newCompany).get(0))
-                        .setStatus(statusMapper.getStatusByName(newStatus).get(0)));
+        Contact contact = new Contact().setFirstName("FIRST_NAME")
+                .setLastName("LAST_NAME")
+                .setEmail("EMAIL@EMAIL.VU")
+                .setCompany(companyMapper.getCompanyByName(newCompany).get(0))
+                .setStatus(statusMapper.getStatusByName(newStatus).get(0));
+        contactId = UUID.fromString(contactMapper.insertContact(
+                contact));
     }
 
     @AfterEach
@@ -64,7 +65,7 @@ class ContactMapperTest {
     void getCompaniesList() {
         var contact = contactMapper.getContactByName(contactId);
         assertThat(contact).isNotNull();
-        assertThat(contact.getId()).isEqualTo(contact);
+        assertThat(contact.getId()).isEqualTo(contactId);
         assertThat(contact.getCompany().getName()).isEqualTo(newCompany);
         assertThat(contact.getStatus().getName()).isEqualTo(newStatus);
     }

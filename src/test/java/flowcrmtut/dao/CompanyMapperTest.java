@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
+import java.util.UUID;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -20,11 +21,13 @@ class CompanyMapperTest {
     private CompanyMapper companyMapper;
     private String newCompany;
 
+    private UUID uuid;
+
     @BeforeEach
     void setUp() {
 
         newCompany = "NewCompany";
-        companyMapper.insertCompany((Company) new Company().setName(newCompany));
+        uuid = UUID.fromString(companyMapper.insertCompany(new Company().setName(newCompany)));
     }
 
     @AfterEach

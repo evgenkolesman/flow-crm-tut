@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.sql.DataSource;
+import java.util.UUID;
 
 @Configuration
 public class MyBatisConfig {
@@ -25,7 +26,7 @@ public class MyBatisConfig {
         SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
         factoryBean.setDataSource(dataSource);
         factoryBean.setTransactionFactory(new ManagedTransactionFactory());
-        factoryBean.setTypeAliases(Status.class, Company.class, Contact.class, Employee.class);
+        factoryBean.setTypeAliases(Status.class, Company.class, Contact.class, Employee.class, UUID.class);
         SqlSessionFactory sqlSessionFactory = factoryBean.getObject();
         sqlSessionFactory.getConfiguration().setJdbcTypeForNull(JdbcType.NULL);
 
