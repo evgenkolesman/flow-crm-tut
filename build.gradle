@@ -9,7 +9,9 @@ group = 'ru.koleson'
 version = '0.0.1-SNAPSHOT'
 
 java {
-    sourceCompatibility = '17'
+
+    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+//    sourceCompatibility = '17'
 }
 
 configurations {
@@ -18,15 +20,12 @@ configurations {
     }
 }
 
-repositories {
-    mavenCentral()
-}
-
 ext {
     set('vaadinVersion', "23.3.24")
 }
 
 dependencies {
+//    implementation(project("someproject")) для подпроекта
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'com.vaadin:vaadin-spring-boot-starter'
     implementation 'org.liquibase:liquibase-core'

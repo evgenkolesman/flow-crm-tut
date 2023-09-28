@@ -1,1 +1,14 @@
-rootProject.name = 'flow-crm-tut'
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+    }
+}
+
+rootProject.name = "flow-crm-tut"
+
+
+dependencyResolutionManagement {
+    repositories{
+        mavenCentral()
+    }
+}
