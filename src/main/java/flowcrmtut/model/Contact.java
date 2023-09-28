@@ -1,11 +1,24 @@
 package flowcrmtut.model;
 
+import java.util.UUID;
+
 public class Contact {
+    private UUID id;
     private String firstName;
     private String lastName;
     private String email;
     private Status status;
     private Company company;
+
+    public UUID getId() {
+        return id;
+    }
+
+    public Contact setId(UUID id) {
+        this.id = id;
+        return this;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -35,6 +48,14 @@ public class Contact {
 
     public Status getStatus() {
         return status;
+    }
+
+    public UUID getStatus_id() {
+        if(this.status != null) {
+            return status.getId();
+        } else {
+            return null;
+        }
     }
 
     public Contact setStatus(Status status) {

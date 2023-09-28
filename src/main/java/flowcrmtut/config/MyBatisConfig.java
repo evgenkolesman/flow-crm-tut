@@ -2,11 +2,13 @@ package flowcrmtut.config;
 
 
 import flowcrmtut.model.Company;
+import flowcrmtut.model.Contact;
+import flowcrmtut.model.Employee;
+import flowcrmtut.model.Status;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.transaction.managed.ManagedTransactionFactory;
-import org.apache.ibatis.type.MappedTypes;
+import org.apache.ibatis.type.JdbcType;
 import org.mybatis.spring.SqlSessionFactoryBean;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,7 +25,11 @@ public class MyBatisConfig {
         SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
         factoryBean.setDataSource(dataSource);
         factoryBean.setTransactionFactory(new ManagedTransactionFactory());
-        return factoryBean.getObject();
+        factoryBean.setTypeAliases(Status.class, Company.class, Contact.class, Employee.class);
+        SqlSessionFactory sqlSessionFactory = factoryBean.getObject();
+        sqlSessionFactory.getConfiguration().setJdbcTypeForNull(JdbcType.NULL);
+
+        return sqlSessionFactory;
     }
 
 

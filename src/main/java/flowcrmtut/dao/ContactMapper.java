@@ -16,26 +16,25 @@ public interface ContactMapper {
     List<Company> getContactsList();
 
     @Select("""
-            SELECT * FROM flowcrmtut.contact WHERE id = #{id}
+            SELECT id, first_name, last_name, email, status_id , company_id
+            FROM flowcrmtut.contact WHERE id = #{id}
             """)
-    List<Company> getContactByName(@Param("id") UUID id);
+    Contact getContactByName(@Param("id") UUID id);
 
 
     @Insert("""
             INSERT INTO flowcrmtut.contact(first_name, last_name, email, status_id, company_id)
-            VALUES(#{first_name},#{last_name}, #{email}, #{contact.status.id}, #{contact.company.id})
+            VALUES(#{firstName},#{lastName}, #{email}, #{status, javaType = Status, jdbcType=JAVA_OBJECT, typeHandler=ObjectTypeHandler}, #{company, javaType = Company, jdbcType=JAVA_OBJECT})
             """)
-    @Options(useGeneratedKeys = true, keyProperty = "id",
+    @Options(useGeneratedKeys = true,
+            keyProperty = "id",
             keyColumn = "id")
-    void insertContact(Contact contact);
-
+    UUID insertContact(Contact contact);
+//JdbcType
     @Delete("""
             DELETE FROM flowcrmtut.contact
             WHERE id = #{id}
             """)
-    void deleteContactById(@Param("id") String name);
-
-
-
+    void deleteContactById(@Param("id") UUID id);
 
 }
