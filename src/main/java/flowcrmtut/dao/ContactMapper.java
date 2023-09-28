@@ -27,13 +27,17 @@ public interface ContactMapper {
             @Result(column = "first_name", property = "firstName"),
             @Result(column = "last_name", property = "lastName"),
             @Result(column = "email", property = "email"),
-            @Result(column = "status_id", property = "status", javaType = Status.class, typeHandler = StatusHandler.class),
-            @Result(column = "company_id", property = "company", javaType = Company.class, typeHandler = CompanyHandler.class),
-
-
+            @Result(column = "status_id", property = "status",
+                    javaType = Status.class,
+                    typeHandler = StatusHandler.class,
+                    one = @One(columnPrefix = "status")),
+            @Result(column = "company_id", property = "company",
+                    javaType = Company.class,
+                    typeHandler = CompanyHandler.class,
+                    one = @One(columnPrefix = "company"))
     })
     @Select("""
-            SELECT id, first_name, last_name, email, status_id , company_id
+            SELECT id, first_name, last_name, email, status_id::varchar , company_id::varchar
             FROM flowcrmtut.contact WHERE id = #{id}
             """)
     Contact getContactByName(@Param("id") UUID id);
@@ -57,5 +61,9 @@ public interface ContactMapper {
             WHERE id = #{id}
             """)
     void deleteContactById(@Param("id") UUID id);
+ @Delete("""
+            DELETE  FROM flowcrmtut.contact
+            """)
+    void deleteContactAll(@Param("id") UUID id);
 
 }
