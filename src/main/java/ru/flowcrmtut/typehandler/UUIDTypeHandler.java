@@ -1,4 +1,4 @@
-package flowcrmtut.typehandler;
+package ru.flowcrmtut.typehandler;
 
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;

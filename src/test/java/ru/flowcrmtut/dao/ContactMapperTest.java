@@ -1,9 +1,9 @@
-package flowcrmtut.dao;
+package ru.flowcrmtut.dao;
 
-import flowcrmtut.FlowCrmTutApplication;
-import flowcrmtut.model.Company;
-import flowcrmtut.model.Contact;
-import flowcrmtut.model.Status;
+import ru.flowcrmtut.FlowCrmTutApplication;
+import ru.flowcrmtut.model.Company;
+import ru.flowcrmtut.model.Contact;
+import ru.flowcrmtut.model.Status;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -64,7 +64,7 @@ class ContactMapperTest {
 
     @Test
     void getContactFullCase() {
-        var contact = contactMapper.getContactByName(contactId);
+        var contact = contactMapper.getContactById(contactId);
         assertThat(contact).isNotNull();
         assertThat(contact.getId()).isEqualTo(contactId);
         assertThat(contact.getLastName()).isEqualTo("LAST_NAME");

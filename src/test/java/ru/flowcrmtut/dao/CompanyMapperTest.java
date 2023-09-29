@@ -1,7 +1,7 @@
-package flowcrmtut.dao;
+package ru.flowcrmtut.dao;
 
-import flowcrmtut.FlowCrmTutApplication;
-import flowcrmtut.model.Company;
+import ru.flowcrmtut.FlowCrmTutApplication;
+import ru.flowcrmtut.model.Company;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

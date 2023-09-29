@@ -1,7 +1,7 @@
-package flowcrmtut.dao;
+package ru.flowcrmtut.dao;
 
-import flowcrmtut.model.Status;
-import flowcrmtut.typehandler.UUIDTypeHandler;
+import ru.flowcrmtut.model.Status;
+import ru.flowcrmtut.typehandler.UUIDTypeHandler;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;

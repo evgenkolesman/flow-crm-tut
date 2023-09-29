@@ -1,4 +1,4 @@
-package flowcrmtut.model;
+package ru.flowcrmtut.model;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Key;

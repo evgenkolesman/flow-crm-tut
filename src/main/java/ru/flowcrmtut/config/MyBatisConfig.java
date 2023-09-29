@@ -1,10 +1,10 @@
-package flowcrmtut.config;
+package ru.flowcrmtut.config;
 
 
-import flowcrmtut.model.Company;
-import flowcrmtut.model.Contact;
-import flowcrmtut.model.Employee;
-import flowcrmtut.model.Status;
+import ru.flowcrmtut.model.Company;
+import ru.flowcrmtut.model.Contact;
+import ru.flowcrmtut.model.Employee;
+import ru.flowcrmtut.model.Status;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.transaction.managed.ManagedTransactionFactory;
 import org.apache.ibatis.type.JdbcType;

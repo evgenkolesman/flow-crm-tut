@@ -1,18 +1,17 @@
-package flowcrmtut.typehandler;
+package ru.flowcrmtut.typehandler;
 
-import flowcrmtut.config.CommonConfig;
-import flowcrmtut.dao.StatusMapper;
-import flowcrmtut.model.Status;
+import ru.flowcrmtut.config.CommonConfig;
+import ru.flowcrmtut.dao.StatusMapper;
+import ru.flowcrmtut.model.Status;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedJdbcTypes;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.UUID;
 
 @MappedJdbcTypes(value = JdbcType.VARCHAR, includeNullJdbcType = true)
 public class StatusHandler extends BaseTypeHandler<Status> {
@@ -26,7 +25,7 @@ public class StatusHandler extends BaseTypeHandler<Status> {
 
     @Override
     public Status getNullableResult(ResultSet rs, String columnName) throws SQLException {
-        return statusMapper.getStatusById(rs.getObject(columnName, String.class));
+        return statusMapper.getStatusById(rs.getObject(columnName, UUID.class).toString());
 
     }
 

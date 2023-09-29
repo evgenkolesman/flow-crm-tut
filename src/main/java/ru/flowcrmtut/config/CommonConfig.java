@@ -1,4 +1,4 @@
-package flowcrmtut.config;
+package ru.flowcrmtut.config;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

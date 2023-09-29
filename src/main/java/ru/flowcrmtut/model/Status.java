@@ -1,4 +1,4 @@
-package flowcrmtut.model;
+package ru.flowcrmtut.model;
 
 import java.util.UUID;
 

@@ -1,18 +1,17 @@
-package flowcrmtut.typehandler;
+package ru.flowcrmtut.typehandler;
 
-import flowcrmtut.config.CommonConfig;
-import flowcrmtut.dao.CompanyMapper;
-import flowcrmtut.dao.StatusMapper;
-import flowcrmtut.model.Company;
+import ru.flowcrmtut.config.CommonConfig;
+import ru.flowcrmtut.dao.CompanyMapper;
+import ru.flowcrmtut.model.Company;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedJdbcTypes;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.UUID;
 
 @MappedJdbcTypes(value = JdbcType.VARCHAR, includeNullJdbcType = true)
 public class CompanyHandler extends BaseTypeHandler<Company> {
@@ -26,7 +25,7 @@ public class CompanyHandler extends BaseTypeHandler<Company> {
 
     @Override
     public Company getNullableResult(ResultSet rs, String columnName) throws SQLException {
-        return companyMapper.getCompanyById(rs.getObject(columnName, String.class));
+        return companyMapper.getCompanyById(rs.getObject(columnName, UUID.class).toString());
     }
 
     @Override
