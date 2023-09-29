@@ -44,12 +44,12 @@ class ContactMapperTest {
         newStatus = "NEW";
         UUID statusUUID = UUID.fromString(statusMapper.insertStatus(new Status().setName(newStatus)));
 
-        Contact contact = new Contact().setFirstName("FIRST_NAME")
-                .setLastName("LAST_NAME")
-                .setFirstName("FIRST_NAME")
-                .setEmail("EMAIL@EMAIL.VU")
-                .setCompany(companyMapper.getCompanyByName(newCompany).get(0))
-                .setStatus(statusMapper.getStatusByName(newStatus).get(0));
+        Contact contact = new Contact()
+                .setFirstNameB("FIRST_NAME")
+                .setLastNameB("LAST_NAME")
+                .setEmailB("EMAIL@EMAIL.VU")
+                .setCompanyB(companyMapper.getCompanyByName(newCompany).get(0))
+                .setStatusB(statusMapper.getStatusByName(newStatus).get(0));
         contactId = UUID.fromString(contactMapper.insertContact(
                 contact));
     }
