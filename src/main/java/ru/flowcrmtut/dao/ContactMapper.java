@@ -32,7 +32,7 @@ public interface ContactMapper {
             SELECT * FROM flowcrmtut.contact
             """)
     List<Contact> getContactsList();
-
+//TODO work with this sorting problems and handling
     @Results({
             @Result(column = "id", property = "id", typeHandler = UUIDTypeHandler.class),
             @Result(column = "first_name", property = "firstName"),
@@ -67,7 +67,7 @@ public interface ContactMapper {
                         one = @One(columnPrefix = "company"))
         })
         @Select("""
-                select c from flowcrmtut.contact c where lower(c.first_name) like lower(concat('%', #{searchTerm}, '%'))
+                select  id, first_name, last_name, email, status_id , company_id from flowcrmtut.contact c where lower(c.first_name) like lower(concat('%', #{searchTerm}, '%'))
                 or lower(c.last_name) like lower(concat('%', #{searchTerm}, '%'))
                 """)
         List<Contact> getContactBySearchData(@Param("searchTerm") String searchTerm);

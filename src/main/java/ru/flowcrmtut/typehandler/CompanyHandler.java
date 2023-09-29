@@ -1,5 +1,6 @@
 package ru.flowcrmtut.typehandler;
 
+import lombok.extern.slf4j.Slf4j;
 import ru.flowcrmtut.config.CommonConfig;
 import ru.flowcrmtut.dao.CompanyMapper;
 import ru.flowcrmtut.model.Company;
@@ -14,6 +15,7 @@ import java.sql.SQLException;
 import java.util.UUID;
 
 @MappedJdbcTypes(value = JdbcType.VARCHAR, includeNullJdbcType = true)
+@Slf4j
 public class CompanyHandler extends BaseTypeHandler<Company> {
 
     private CompanyMapper companyMapper = (CompanyMapper) CommonConfig.getApplicationContext().getBean("companyMapper");;
@@ -25,7 +27,12 @@ public class CompanyHandler extends BaseTypeHandler<Company> {
 
     @Override
     public Company getNullableResult(ResultSet rs, String columnName) throws SQLException {
-        return companyMapper.getCompanyById(rs.getObject(columnName, UUID.class).toString());
+        try {
+            return companyMapper.getCompanyById(rs.getObject(columnName, UUID.class).toString());
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return null;
+        }
     }
 
     @Override

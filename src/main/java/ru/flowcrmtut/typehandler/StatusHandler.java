@@ -1,5 +1,6 @@
 package ru.flowcrmtut.typehandler;
 
+import lombok.extern.slf4j.Slf4j;
 import ru.flowcrmtut.config.CommonConfig;
 import ru.flowcrmtut.dao.StatusMapper;
 import ru.flowcrmtut.model.Status;
@@ -14,6 +15,7 @@ import java.sql.SQLException;
 import java.util.UUID;
 
 @MappedJdbcTypes(value = JdbcType.VARCHAR, includeNullJdbcType = true)
+@Slf4j
 public class StatusHandler extends BaseTypeHandler<Status> {
 
     private StatusMapper statusMapper = (StatusMapper) CommonConfig.getApplicationContext().getBean("statusMapper");
@@ -25,13 +27,18 @@ public class StatusHandler extends BaseTypeHandler<Status> {
 
     @Override
     public Status getNullableResult(ResultSet rs, String columnName) throws SQLException {
-        return statusMapper.getStatusById(rs.getObject(columnName, UUID.class).toString());
+        try {
+            return statusMapper.getStatusById(String.valueOf(rs.getObject(columnName, UUID.class)));
+        } catch (Exception e ) {
+            log.error(e.getMessage());
+            return null;
+        }
 
     }
 
     @Override
     public Status getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
-        return statusMapper.getStatusById(rs.getObject(columnIndex, String.class));
+        return statusMapper.getStatusById(String.valueOf(rs.getObject(columnIndex, UUID.class)));
 
     }
 
