@@ -14,7 +14,7 @@ import ru.flowcrmtut.model.Contact;
 import ru.flowcrmtut.model.ContactForm;
 import ru.flowcrmtut.service.CrmService;
 
-@Route(value = "")
+@Route(value = "", layout = MainLayout.class)
 @PageTitle("Contacts | Vaadin CRM")
 @Slf4j
 public class ListView extends VerticalLayout {
@@ -37,8 +37,16 @@ public class ListView extends VerticalLayout {
 
         add(getToolbar(),
                 getContent());
-
+        //this selects all results from db and visualize it in grid
         updateList();
+        // this close editor when nothing is selected
+        closeEditor();
+    }
+
+    private void closeEditor() {
+        contactForm.setContact(null);
+        contactForm.setVisible(false);
+        removeClassName("editing");
     }
 
     private void updateList() {
@@ -55,6 +63,19 @@ public class ListView extends VerticalLayout {
         }).setHeader("Status");
         grid.addColumn(contact -> contact.getCompany().getName()).setHeader("Company");
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
+        // we use grid ass single select
+        grid.asSingleSelect().addValueChangeListener(event -> editContact(event.getValue()));
+    }
+    //take data from edited contact
+    private void editContact(Contact value) {
+        if( value == null) {
+            closeEditor();
+        } else {
+            // Vizualization of editing
+            contactForm.setContact(value);
+            contactForm.setVisible(true);
+            addClassName("editing");
+        }
     }
 
     private Component getToolbar() {
@@ -64,10 +85,16 @@ public class ListView extends VerticalLayout {
         filterText.addValueChangeListener(e -> updateList());
 
         Button addContactButton = new Button("Add contact");
+        addContactButton.addClickListener( event -> addContact());
 
         var toolbar = new HorizontalLayout(filterText, addContactButton);
         toolbar.addClassName("toolbar");
         return toolbar;
+    }
+
+    private void addContact() {
+        grid.asSingleSelect().clear();
+        editContact(new Contact());
     }
 
     private HorizontalLayout getContent() {
@@ -82,5 +109,25 @@ public class ListView extends VerticalLayout {
     private void configureForm() {
         contactForm = new ContactForm(crmService.getAllCompanies(),crmService.getAllStatuses());
         contactForm.setWidth("25em");
+        // events
+
+        contactForm.addSaveListener(this::saveContact);
+        contactForm.addCloseListener(event -> closeEditor());
+        contactForm.addDeleteListener(this::deleteContact);
+
+    }
+
+
+
+    private void deleteContact(ContactForm.DeleteEvent deleteEvent) {
+        crmService.deleteContact(deleteEvent.getContact());
+        updateList();
+        closeEditor();
+    }
+
+    private void saveContact(ContactForm.SaveEvent saveEvent) {
+        crmService.saveContact(saveEvent.getContact());
+        updateList();
+        closeEditor();
     }
 }

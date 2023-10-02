@@ -15,9 +15,12 @@ import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.ValidationException;
 import com.vaadin.flow.shared.Registration;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 
+//UI Component
+@Slf4j
 public class ContactForm extends FormLayout {
 //    Binds Contact and Form
     Binder<Contact> binder = new BeanValidationBinder<>(Contact.class);
@@ -76,6 +79,7 @@ public class ContactForm extends FormLayout {
             binder.writeBean(contact);
             fireEvent(new SaveEvent(this, contact));
         } catch (ValidationException e) {
+            log.error(e.getLocalizedMessage());
             e.printStackTrace();
         }
     }

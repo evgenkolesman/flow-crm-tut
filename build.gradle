@@ -24,6 +24,7 @@ dependencies {
 //    implementation(project("someproject")) для подпроекта
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation libs.vaadin
+    implementation libs.vaadin.chart
     implementation 'org.liquibase:liquibase-core'
     implementation libs.mybatis
     compileOnly 'org.projectlombok:lombok'

@@ -1,12 +1,12 @@
 package ru.flowcrmtut.dao;
 
+import org.apache.ibatis.annotations.*;
 import ru.flowcrmtut.model.Company;
 import ru.flowcrmtut.model.Contact;
 import ru.flowcrmtut.model.Status;
 import ru.flowcrmtut.typehandler.CompanyHandler;
 import ru.flowcrmtut.typehandler.StatusHandler;
 import ru.flowcrmtut.typehandler.UUIDTypeHandler;
-import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -32,7 +32,8 @@ public interface ContactMapper {
             SELECT * FROM flowcrmtut.contact
             """)
     List<Contact> getContactsList();
-//TODO work with this sorting problems and handling
+
+    //TODO work with this sorting problems and handling
     @Results({
             @Result(column = "id", property = "id", typeHandler = UUIDTypeHandler.class),
             @Result(column = "first_name", property = "firstName"),
@@ -52,25 +53,26 @@ public interface ContactMapper {
             FROM flowcrmtut.contact WHERE id = #{id}
             """)
     Contact getContactById(@Param("id") UUID id);
-        @Results({
-                @Result(column = "id", property = "id", typeHandler = UUIDTypeHandler.class),
-                @Result(column = "first_name", property = "firstName"),
-                @Result(column = "last_name", property = "lastName"),
-                @Result(column = "email", property = "email"),
-                @Result(column = "status_id", property = "status",
-                        javaType = Status.class,
-                        typeHandler = StatusHandler.class,
-                        one = @One(columnPrefix = "status")),
-                @Result(column = "company_id", property = "company",
-                        javaType = Company.class,
-                        typeHandler = CompanyHandler.class,
-                        one = @One(columnPrefix = "company"))
-        })
-        @Select("""
-                select  id, first_name, last_name, email, status_id , company_id from flowcrmtut.contact c where lower(c.first_name) like lower(concat('%', #{searchTerm}, '%'))
-                or lower(c.last_name) like lower(concat('%', #{searchTerm}, '%'))
-                """)
-        List<Contact> getContactBySearchData(@Param("searchTerm") String searchTerm);
+
+    @Results({
+            @Result(column = "id", property = "id", typeHandler = UUIDTypeHandler.class),
+            @Result(column = "first_name", property = "firstName"),
+            @Result(column = "last_name", property = "lastName"),
+            @Result(column = "email", property = "email"),
+            @Result(column = "status_id", property = "status",
+                    javaType = Status.class,
+                    typeHandler = StatusHandler.class,
+                    one = @One(columnPrefix = "status")),
+            @Result(column = "company_id", property = "company",
+                    javaType = Company.class,
+                    typeHandler = CompanyHandler.class,
+                    one = @One(columnPrefix = "company"))
+    })
+    @Select("""
+            select  id, first_name, last_name, email, status_id , company_id from flowcrmtut.contact c where lower(c.first_name) like lower(concat('%', #{searchTerm}, '%'))
+            or lower(c.last_name) like lower(concat('%', #{searchTerm}, '%'))
+            """)
+    List<Contact> getContactBySearchData(@Param("searchTerm") String searchTerm);
 
 
     @Select("""
@@ -85,15 +87,20 @@ public interface ContactMapper {
             keyColumn = "id")
     @Result(id = true, column = "id")
     String insertContact(Contact contact);
-//JdbcType
+
+    //JdbcType
     @Delete("""
             DELETE FROM flowcrmtut.contact
             WHERE id = #{id}
             """)
     void deleteContactById(@Param("id") UUID id);
- @Delete("""
+
+    @Delete("""
             DELETE  FROM flowcrmtut.contact
             """)
     void deleteContactAll(@Param("id") UUID id);
+
+    @Select("SELECT count(id) FROM flowcrmtut.contact")
+    int countContacts();
 
 }

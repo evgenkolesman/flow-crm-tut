@@ -5,3 +5,4 @@ vaadinVersion = "23.3.24"
 mybatis = { module = "org.mybatis.spring.boot:mybatis-spring-boot-starter", version.ref = "mybatisVersion" }
 mybatis-test = { module = "org.mybatis.spring.boot:mybatis-spring-boot-starter-test", version.ref = "mybatisVersion" }
 vaadin = { module = "com.vaadin:vaadin-spring-boot-starter", version.ref = "vaadinVersion"}
+vaadin-chart = {module= "com.vaadin:vaadin-charts-flow", version.ref = "vaadinVersion"}

@@ -11,6 +11,7 @@ import ru.flowcrmtut.model.Contact;
 import ru.flowcrmtut.model.Status;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -49,7 +50,12 @@ public class CrmService {
         return companyMapper.getCompaniesList();
     }
 
+    public int countContacts() {
+        return contactMapper.countContacts();
+    }
 
 
-
+    public int getEmployeeCountByCompany(String id) {
+        return 2;
+    }
 }
