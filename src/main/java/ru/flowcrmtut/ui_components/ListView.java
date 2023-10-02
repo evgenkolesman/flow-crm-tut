@@ -50,8 +50,7 @@ public class ListView extends VerticalLayout {
         grid.setSizeFull();
         grid.setColumns("firstName", "lastName", "email");
         grid.addColumn(contact -> {
-            log.error(contact.toString());
-
+            log.warn(contact.toString());
             return contact.getStatus().getName();
         }).setHeader("Status");
         grid.addColumn(contact -> contact.getCompany().getName()).setHeader("Company");

@@ -73,5 +73,17 @@ class ContactMapperTest {
         assertThat(contact.getStatus().getName()).isEqualTo(newStatus);
         assertThat(contact.getCompany().getName()).isEqualTo(newCompany);
     }
+    @Test
+    void getContactSearchRequest() {
+        var contactList = contactMapper.getContactBySearchData("SEC");
+        var contact = contactList.get(0);
+        assertThat(contact).isNotNull();
+//        assertThat(contact.getId()).isEqualTo(contactId);
+        assertThat(contact.getLastName()).isEqualTo("LAST_NAME");
+        assertThat(contact.getFirstName()).isEqualTo("SECOND_NAME");
+        assertThat(contact.getEmail()).isEqualTo("EMAIL@EMAIL.VU");
+        assertThat(contact.getStatus().getName()).isEqualTo(newStatus);
+        assertThat(contact.getCompany().getName()).isEqualTo(newCompany);
+    }
 
 }

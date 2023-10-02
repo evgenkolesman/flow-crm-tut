@@ -22,4 +22,12 @@ public class Status extends CommonModel{
         this.name = name;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "Status{" +
+               "id=" + id +
+               ", name='" + name + '\'' +
+               '}';
+    }
 }

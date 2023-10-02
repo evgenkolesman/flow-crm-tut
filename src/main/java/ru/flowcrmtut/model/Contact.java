@@ -102,6 +102,15 @@ public class Contact {
         this.company = company;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "Contact{" +
+               "id=" + id +
+               ", firstName='" + firstName + '\'' +
+               ", lastName='" + lastName + '\'' +
+               ", email='" + email + '\'' +
+               ", status=" + status +
+               ", company=" + company +
+               '}';
+    }
 }
