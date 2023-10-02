@@ -14,8 +14,11 @@ import ru.flowcrmtut.model.Contact;
 import ru.flowcrmtut.model.ContactForm;
 import ru.flowcrmtut.service.CrmService;
 
+import javax.annotation.security.PermitAll;
+
 @Route(value = "", layout = MainLayout.class)
 @PageTitle("Contacts | Vaadin CRM")
+@PermitAll
 @Slf4j
 public class ListView extends VerticalLayout {
     Grid<Contact> grid = new Grid<>(Contact.class);

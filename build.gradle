@@ -23,6 +23,8 @@ configurations {
 dependencies {
 //    implementation(project("someproject")) для подпроекта
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation libs.vaadin
     implementation libs.vaadin.chart
     implementation 'org.liquibase:liquibase-core'
