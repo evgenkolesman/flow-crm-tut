@@ -1,7 +1,6 @@
 package ru.flowcrmtut.ui_components;
 
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.charts.ChartVariant;
 import com.vaadin.flow.component.charts.model.ChartType;
 import com.vaadin.flow.component.charts.model.DataSeries;
 import com.vaadin.flow.component.charts.model.DataSeriesItem;
@@ -11,6 +10,7 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.component.charts.Chart;
 
+import com.vaadin.flow.theme.lumo.LumoUtility;
 import ru.flowcrmtut.service.CrmService;
 
 @Route(value = "dashboard", layout = MainLayout.class)
@@ -24,13 +24,16 @@ public class DashboardView extends VerticalLayout {
         addClassName("dashboard-view");
         setHorizontalComponentAlignment(Alignment.CENTER);
 
-        add(getContactStats(), getCompanyChart());
+        add(getContactStats(),
+                getCompanyChart());
 
     }
 
     private Component getContactStats() {
         Span span = new Span(crmService.countContacts() + " contact");
-        span.addClassNames("text-xl", "mt-m");
+        span.addClassNames(
+                LumoUtility.FontSize.XLARGE,
+                LumoUtility.Margin.Top.MEDIUM);
         return span;
     }
 
@@ -40,12 +43,15 @@ public class DashboardView extends VerticalLayout {
         DataSeries dataSeries = new DataSeries();
 
         crmService.getAllCompanies()
-                .forEach( company ->
+                .forEach(company ->
                         dataSeries.add(new DataSeriesItem(
                                company.getName(),
                                crmService.getEmployeeCountByCompany(String.valueOf(company.getId()))
                         ))
                 );
+
+        chart.getConfiguration().setSeries(dataSeries);
+
         return chart;
     }
 }

@@ -57,7 +57,7 @@ public class CrmService {
     }
 
 
-    public int getEmployeeCountByCompany(String id) {
+    public Integer getEmployeeCountByCompany(String id) {
         return employeeMapper.countEmployeeInCompany(id);
     }
 }

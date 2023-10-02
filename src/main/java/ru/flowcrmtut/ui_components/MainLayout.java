@@ -3,7 +3,6 @@ package ru.flowcrmtut.ui_components;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -20,9 +19,11 @@ public class MainLayout extends AppLayout {
 
     private void createDrawerBox() {
         RouterLink list = new RouterLink("List", ListView.class);
+        RouterLink dashboard = new RouterLink("Dashboard", DashboardView.class);
         list.setHighlightCondition(HighlightConditions.sameLocation());
         addToDrawer(new VerticalLayout(
-                list
+                list,
+                dashboard
         ));
     }
 
