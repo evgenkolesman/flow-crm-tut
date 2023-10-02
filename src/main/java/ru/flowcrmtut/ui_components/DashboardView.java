@@ -46,6 +46,6 @@ public class DashboardView extends VerticalLayout {
                                crmService.getEmployeeCountByCompany(String.valueOf(company.getId()))
                         ))
                 );
-        return null;
+        return chart;
     }
 }

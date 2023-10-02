@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.flowcrmtut.dao.CompanyMapper;
 import ru.flowcrmtut.dao.ContactMapper;
+import ru.flowcrmtut.dao.EmployeeMapper;
 import ru.flowcrmtut.dao.StatusMapper;
 import ru.flowcrmtut.model.Company;
 import ru.flowcrmtut.model.Contact;
@@ -21,6 +22,7 @@ public class CrmService {
     private final CompanyMapper companyMapper;
     private final ContactMapper contactMapper;
     private final StatusMapper statusMapper;
+    private final EmployeeMapper employeeMapper;
 
     public List<Contact> findAllContacts(String filterText) {
         if (filterText == null || filterText.isEmpty()) {
@@ -56,6 +58,6 @@ public class CrmService {
 
 
     public int getEmployeeCountByCompany(String id) {
-        return 2;
+        return employeeMapper.countEmployeeInCompany(id);
     }
 }
