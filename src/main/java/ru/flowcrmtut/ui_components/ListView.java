@@ -10,12 +10,15 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Scope;
 import ru.flowcrmtut.model.Contact;
 import ru.flowcrmtut.model.ContactForm;
 import ru.flowcrmtut.service.CrmService;
 
 import javax.annotation.security.PermitAll;
 
+@Scope("prototype")
+@org.springframework.stereotype.Component
 @Route(value = "", layout = MainLayout.class)
 @PageTitle("Contacts | Vaadin CRM")
 @PermitAll

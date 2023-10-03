@@ -24,7 +24,7 @@ import java.util.List;
 public class ContactForm extends FormLayout {
 //    Binds Contact and Form
     Binder<Contact> binder = new BeanValidationBinder<>(Contact.class);
-    TextField firstName = new TextField("First name");
+    public TextField firstName = new TextField("First name");
     TextField lastName = new TextField("Last name");
     EmailField email = new EmailField("Email");
     ComboBox<Status> status = new ComboBox<>("Status");
