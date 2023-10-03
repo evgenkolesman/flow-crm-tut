@@ -6,6 +6,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
     http://www.liquibase.org/xml/ns/dbchangelog-ext https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
     <include file="./db/CheckDBAndSchemaAndTableExist.sql" relativeToChangelogFile="true"/>
+    <include file="./db/FunctionExample.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>
 
 <!--db/migration/V1_Init_DB.sql-->

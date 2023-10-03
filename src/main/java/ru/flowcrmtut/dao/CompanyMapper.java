@@ -49,6 +49,12 @@ public interface CompanyMapper {
             """)
     void deleteCompanyByName(@Param("name") String name);
 
+ @Delete("""
+            DELETE FROM flowcrmtut.company
+            WHERE id = #{id}::uuid
+            """)
+    void deleteCompanyById(@Param("id") String id);
+
 
 
 

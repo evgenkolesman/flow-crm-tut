@@ -49,7 +49,7 @@ public interface ContactMapper {
                     one = @One(columnPrefix = "company"))
     })
     @Select("""
-            SELECT id, first_name, last_name, email, status_id::varchar , company_id::varchar
+            SELECT id, first_name, last_name, email, status_id, company_id
             FROM flowcrmtut.contact WHERE id = #{id}
             """)
     Contact getContactById(@Param("id") UUID id);
@@ -102,5 +102,8 @@ public interface ContactMapper {
 
     @Select("SELECT count(id) FROM flowcrmtut.contact")
     int countContacts();
+
+    @Select("SELECT count_con(#{pattern})")
+    int countContactsWithPattern(@Param("pattern") String pattern);
 
 }

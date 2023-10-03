@@ -1,16 +1,17 @@
 package ru.flowcrmtut.dao;
 
-import ru.flowcrmtut.FlowCrmTutApplication;
-import ru.flowcrmtut.model.Company;
-import ru.flowcrmtut.model.Contact;
-import ru.flowcrmtut.model.Status;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import ru.flowcrmtut.FlowCrmTutApplication;
+import ru.flowcrmtut.model.Company;
+import ru.flowcrmtut.model.Contact;
+import ru.flowcrmtut.model.Status;
 
 import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -24,25 +25,25 @@ class ContactMapperTest {
     @Autowired
     private StatusMapper statusMapper;
 
-     @Autowired
+    @Autowired
     private ContactMapper contactMapper;
-
-
 
 
     private String newCompany;
     private String newStatus;
 
     private UUID contactId;
+    private UUID statusUUID;
+    private String companyId;
 
     @BeforeEach
     void setUp() {
 
-        newCompany = "NewCompany";
-        String s = companyMapper.insertCompany(new Company().setName(newCompany));
+        newCompany = "NewCompany " + ThreadLocalRandom.current().nextInt(100);
+        companyId = companyMapper.insertCompany(new Company().setName(newCompany));
 
-        newStatus = "NEW";
-        UUID statusUUID = UUID.fromString(statusMapper.insertStatus(new Status().setName(newStatus)));
+        newStatus = "NEW " + ThreadLocalRandom.current().nextInt(100);
+        statusUUID = UUID.fromString(statusMapper.insertStatus(new Status().setName(newStatus)));
 
         Contact contact = new Contact()
                 .setFirstNameB("FIRST_NAME")
@@ -57,8 +58,8 @@ class ContactMapperTest {
     @AfterEach
     void tearDown() {
         contactMapper.deleteContactById(contactId);
-        companyMapper.deleteCompanyByName(newCompany);
-        statusMapper.deleteStatusByName(newStatus);
+        companyMapper.deleteCompanyById(companyId);
+        statusMapper.deleteStatusById(statusUUID);
 
     }
 
@@ -73,6 +74,7 @@ class ContactMapperTest {
         assertThat(contact.getStatus().getName()).isEqualTo(newStatus);
         assertThat(contact.getCompany().getName()).isEqualTo(newCompany);
     }
+
     @Test
     void getContactSearchRequest() {
         var contactList = contactMapper.getContactBySearchData("SEC");
@@ -82,8 +84,15 @@ class ContactMapperTest {
         assertThat(contact.getLastName()).isEqualTo("LAST_NAME");
         assertThat(contact.getFirstName()).isEqualTo("SECOND_NAME");
         assertThat(contact.getEmail()).isEqualTo("EMAIL@EMAIL.VU");
-        assertThat(contact.getStatus().getName()).isEqualTo(newStatus);
-        assertThat(contact.getCompany().getName()).isEqualTo(newCompany);
+        assertThat(contact.getStatus().getName()).isEqualTo("NEW");
+        assertThat(contact.getCompany().getName()).isEqualTo("NewCompany");
+    }
+
+
+    @Test
+    void countContactsWithPatternProcedureTest() {
+        var numberContact = contactMapper.countContactsWithPattern("SEC");
+        assertThat(numberContact).isEqualTo(1);
     }
 
 }

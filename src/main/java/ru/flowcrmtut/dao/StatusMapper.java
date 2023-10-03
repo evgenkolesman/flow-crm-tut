@@ -5,6 +5,7 @@ import ru.flowcrmtut.typehandler.UUIDTypeHandler;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @Mapper
 public interface StatusMapper {
@@ -48,6 +49,12 @@ public interface StatusMapper {
             WHERE name = #{name}
             """)
     void deleteStatusByName(@Param("name") String name);
+
+ @Delete("""
+            DELETE FROM flowcrmtut.status
+            WHERE id = #{id}
+            """)
+    void deleteStatusById(@Param("id") UUID id);
 
 
 
